@@ -46,7 +46,7 @@ app.post(
 //Morgan for logging
 app.use(morgan("dev"));
 //Routes
-app.use("/auth", require("./routes/auth"));
+app.use("/api/v1/auth", require("./routes/auth"));
 app.use("/api/v1/categories", require("./routes/category"));
 //Error handling
 app.use(errorHandler);
@@ -60,8 +60,8 @@ const server = app.listen(PORT, (err, res) => {
   );
 });
 
-process.on("unhandledRejection", async (err) => {
+process.on("unhandledRejection", (err) => {
   console.log(`Server closed due to unhandled rejection ${err}`.red);
-  await server.close();
+  server.close();
   process.exit();
 });
